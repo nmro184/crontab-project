@@ -77,6 +77,45 @@ def valid_month(input):
 def valid_day_of_week(input):
     return valid_input(input , ALLOWED_DAY_OF_WEEK_RANGE)
 
+def crontab_translator(input:list):
+    return minutes_translator(input[0])
 
+def minutes_translator(input):
+    output_string =''
+    if input.isdigit():
+        output_string += f'at minute {input}'
+    
+    if '*' in input:
+        output_string += f'every minute'
+
+    if '/' in input:
+        output_string += f'every {input[1:]} minutes'
+
+    if '-' in input:
+        output_string += f'between minutes {input}'
+    
+    if ',' in input:
+        output_string += f'at minutes {input}'
+    
+    return output_string
+
+def hours_translator(input):
+    output_string =''
+    if input.isdigit():
+        output_string += f'at minute {input}'
+    
+    if '*' in input:
+        output_string += f'every minute'
+
+    if '/' in input:
+        output_string += f'every {input[1:]} minutes'
+
+    if '-' in input:
+        output_string += f'between minutes {input}'
+    
+    if ',' in input:
+        output_string += f'at minutes {input}'
+    
+    return output_string
 user_input = input("write your crontab expression - (seperate each field with a space)\nnote - use either step - '/x' range - 'x-y' or a list - x,y,z\n" )
 crontab_test(user_input)
