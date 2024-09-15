@@ -102,19 +102,38 @@ def minutes_translator(input):
 def hours_translator(input):
     output_string =''
     if input.isdigit():
-        output_string += f'at minute {input}'
+        output_string += f'of hour {input}'
     
     if '*' in input:
-        output_string += f'every minute'
+        output_string += f'every hour'
 
     if '/' in input:
-        output_string += f'every {input[1:]} minutes'
+        output_string += f'every {input[1:]} hours'
 
     if '-' in input:
-        output_string += f'between minutes {input}'
+        output_string += f'of hours {input}'
     
     if ',' in input:
-        output_string += f'at minutes {input}'
+        output_string += f'of hours {input}'
+    
+    return output_string
+
+def days_of_month_translator(input):
+    output_string =''
+    if input.isdigit():
+        output_string += f'of the {input} of '
+    
+    if '*' in input:
+        output_string += f''
+
+    if '/' in input:
+        output_string += f'every {input[1:]} days'
+
+    if '-' in input:
+        output_string += f'between the {input} of'
+    
+    if ',' in input:
+        output_string += f'of hours {input}'
     
     return output_string
 user_input = input("write your crontab expression - (seperate each field with a space)\nnote - use either step - '/x' range - 'x-y' or a list - x,y,z\n" )
