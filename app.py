@@ -96,38 +96,38 @@ def crontab_translator(input:list):
 def minutes_translator(input):
     output_string =''
     if input.isdigit():
-        output_string += f'at minute {input}'
+        output_string += f'at minute {input} '
     
     if '*' in input:
-        output_string += f'every minute'
+        output_string += f'every minute '
 
     if '/' in input:
-        output_string += f'every {input[1:]} minutes'
+        output_string += f'every {input[1:]} minutes '
 
     if '-' in input:
-        output_string += f'between minutes {input}'
+        output_string += f'between minutes {input} '
     
     if ',' in input:
-        output_string += f'at minutes {input}'
+        output_string += f'at minutes {input} '
     
     return output_string
 
 def hours_translator(input):
     output_string =''
     if input.isdigit():
-        output_string += f'of hour {input}'
+        output_string += f'of hour {input} '
     
     if '*' in input:
-        output_string += f'every hour'
+        output_string += f'every hour '
 
     if '/' in input:
-        output_string += f'every {input[1:]} hours'
+        output_string += f'every {input[1:]} hours '
 
     if '-' in input:
-        output_string += f'of hours {input}'
+        output_string += f'of hours {input} '
     
     if ',' in input:
-        output_string += f'of hours {input}'
+        output_string += f'of hours {input} '
     
     return output_string
 
@@ -137,57 +137,56 @@ def days_of_month_translator(input):
         output_string += f'of the {input} of '
     
     if '*' in input:
-        output_string += f''
+        output_string += f'any day of '
 
     if '/' in input:
-        output_string += f'every {input[1:]} days'
+        output_string += f'every {input[1:]} days '
 
     if '-' in input:
-        output_string += f'between the {input} of'
+        output_string += f'between the {input} of '
     
     if ',' in input:
-        output_string += f'on days {input}'
+        output_string += f'on days {input} '
     
     return output_string
 
 def number_to_month(number):
     months = ["", "January", "February", "March", "April", "May", "June", 
               "July", "August", "September", "October", "November", "December"]
-    
-    if number in range(1-13):
-        return months[number] 
+    if int(number) in range(1,13):
+        return months[int(number)] 
     
     else: return ''
 
 def month_translator(input):
+    print(input)
     output_string =''
     if input.isdigit():
-        output_string += number_to_month(input)
+        output_string += number_to_month(input) + " "
     
     if '*' in input:
-        output_string += f'any month'
+        output_string += f'any month '
 
     if '/' in input:
-        output_string += f'every {input[1:]} months'
+        output_string += f'every {input[1:]} months '
 
     if '-' in input:
         months = input.split('-')
         month1 = number_to_month(months[0])
         month2 = number_to_month(months[1])
-        output_string += f'{month1} to {month2}'
+        output_string += f'{month1} to {month2} '
     
     if ',' in input:
         months = input.split(',')
         for month in months:
             output_string += number_to_month(month) + " "
-
     return output_string
 
 def number_to_weekday(number):
     days = ["", "Monday", "Tuesday", "Wednesday", "Thursday", 
             "Friday", "Saturday", "Sunday"]
     
-    if int(number) in range(1-31):
+    if int(number) in range(1,31):
         return days[int(number)] 
     
     else: return ''
@@ -195,13 +194,13 @@ def number_to_weekday(number):
 def weekday_translator(input):
     output_string =''
     if input.isdigit():
-        output_string += number_to_weekday(input)
+        output_string += 'on ' + number_to_weekday(input) + 's'
     
     if '*' in input:
-        output_string += f'any day of the week'
+        output_string += f'any day of the week '
 
     if '/' in input:
-        output_string += f'every {input[1:]} day of the week'
+        output_string += f'every {input[1:]} day of the week '
 
     if '-' in input:
         days = input.split('-')
