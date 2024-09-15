@@ -11,7 +11,11 @@ ALLOWED_DAY_OF_WEEK_RANGE = range(0,7)
 def main():
     user_input = input("write your crontab expression - (seperate each field with a space)\nnote - use either step - '/x' range - 'x-y' or a list - x,y,z\n" )
     if valid_crontab_input(user_input):
-        return False
+        print (input_translator(user_input))
+    else:
+        print('invalid input')
+    return
+
     
 
 def valid_crontab_input(expression):
@@ -212,5 +216,16 @@ def weekday_translator(input):
 
     return output_string
 
-def input_translator():
-    return True
+def input_translator(input):
+    output_string =''
+    inputs = input.split()
+    output_string += minutes_translator(inputs[0])
+    output_string += hours_translator(inputs[1])
+    output_string += days_of_month_translator(inputs[2])
+    output_string += month_translator(inputs[3])
+    output_string += weekday_translator(inputs[4])
+
+    return output_string
+
+
+main()
