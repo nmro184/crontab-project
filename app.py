@@ -5,7 +5,16 @@ ALLOWED_DAY_OF_MONTH_RANGE = range(1,32)
 ALLOWED_MONTH_RANGE = range(1,13)
 ALLOWED_DAY_OF_WEEK_RANGE = range(0,7)
 
-def crontab_test(expression):
+
+
+
+def main():
+    user_input = input("write your crontab expression - (seperate each field with a space)\nnote - use either step - '/x' range - 'x-y' or a list - x,y,z\n" )
+    if valid_crontab_input(user_input):
+        return False
+    
+
+def valid_crontab_input(expression):
     parts = str(expression).split()
     if len(parts) != 5:
         return False
@@ -133,8 +142,75 @@ def days_of_month_translator(input):
         output_string += f'between the {input} of'
     
     if ',' in input:
-        output_string += f'of hours {input}'
+        output_string += f'on days {input}'
     
     return output_string
-user_input = input("write your crontab expression - (seperate each field with a space)\nnote - use either step - '/x' range - 'x-y' or a list - x,y,z\n" )
-crontab_test(user_input)
+
+def number_to_month(number):
+    months = ["", "January", "February", "March", "April", "May", "June", 
+              "July", "August", "September", "October", "November", "December"]
+    
+    if number in range(1-13):
+        return months[number] 
+    
+    else: return ''
+
+def month_translator(input):
+    output_string =''
+    if input.isdigit():
+        output_string += number_to_month(input)
+    
+    if '*' in input:
+        output_string += f'any month'
+
+    if '/' in input:
+        output_string += f'every {input[1:]} months'
+
+    if '-' in input:
+        months = input.split('-')
+        month1 = number_to_month(months[0])
+        month2 = number_to_month(months[1])
+        output_string += f'{month1} to {month2}'
+    
+    if ',' in input:
+        months = input.split(',')
+        for month in months:
+            output_string += number_to_month(month) + " "
+
+    return output_string
+
+def number_to_weekday(number):
+    days = ["", "Monday", "Tuesday", "Wednesday", "Thursday", 
+            "Friday", "Saturday", "Sunday"]
+    
+    if int(number) in range(1-31):
+        return days[int(number)] 
+    
+    else: return ''
+
+def weekday_translator(input):
+    output_string =''
+    if input.isdigit():
+        output_string += number_to_weekday(input)
+    
+    if '*' in input:
+        output_string += f'any day of the week'
+
+    if '/' in input:
+        output_string += f'every {input[1:]} day of the week'
+
+    if '-' in input:
+        days = input.split('-')
+        day1 = number_to_weekday(days[0])
+        day2 = number_to_weekday(days[1])
+        output_string += f'{day1} to {day2}'
+    
+    if ',' in input:
+        days = input.split(',')
+        for day in days:
+            output_string += number_to_weekday(day) + " "
+
+    return output_string
+
+def input_translator():
+    return True
