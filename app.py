@@ -183,10 +183,10 @@ def month_translator(input):
     return output_string
 
 def number_to_weekday(number):
-    days = ["", "Monday", "Tuesday", "Wednesday", "Thursday", 
+    days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", 
             "Friday", "Saturday", "Sunday"]
     
-    if int(number) in range(1,31):
+    if int(number) in range(0,7):
         return days[int(number)] 
     
     else: return ''
